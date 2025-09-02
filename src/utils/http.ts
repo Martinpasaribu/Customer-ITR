@@ -1,5 +1,6 @@
 // utils/http.ts
 import axios from "axios";
+import { baseURL } from "./Uri";
 
 // const http = axios.create({
 //   baseURL: "http://localhost:5000/api/v1", // sesuaikan endpoint backend kamu
@@ -13,7 +14,7 @@ import axios from "axios";
 
 
 const http = axios.create({
-  baseURL: "https://server-itr.vercel.app/api/v1", // sesuaikan endpoint backend kamu
+  baseURL: baseURL, // sesuaikan endpoint backend kamu
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
