@@ -55,6 +55,15 @@ export default function CustomerPage() {
     fetchData();
   }, [fetchData]);
 
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      router.push("/login"); // Redirect ke halaman login setelah berhasil logout
+    } catch (error) {
+      console.error("Logout gagal:", error);
+    }
+  };
+
   const handleUpdateStatus = async (status: string) => {
     setLoading(true);
     try {
@@ -81,19 +90,32 @@ export default function CustomerPage() {
       {loading ? <GreetingSkeleton /> : (
         <section className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-xl shadow p-5 sm:p-6 mb-6 sm:mb-8">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-            <div className="flex items-center gap-4">
-              <div className="bg-white text-indigo-600 p-3 rounded-full w-12 h-12 flex items-center justify-center">
-                <User size={28} />
+            
+            {/* Left - User Info */}
+            <div className="flex flex-col justify-start items-start gap-4">
+              
+              <div className="flex  gap-2">
+                <div className="bg-white text-indigo-600 p-3 rounded-full w-12 h-12 flex items-center justify-center">
+                  <User size={28} />
+                </div>
+                <div>
+                  <h2 className="text-base sm:text-lg font-semibold">
+                    Halo, {user?.username} 👋
+                  </h2>
+                  <p className="text-sm opacity-90 leading-snug">
+                    Senang melihat Anda kembali. Semoga harimu menyenangkan!
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-semibold">
-                  Halo, {user?.username} 👋
-                </h2>
-                <p className="text-sm opacity-90 leading-snug">
-                  Senang melihat Anda kembali. Semoga harimu menyenangkan!
-                </p>
+
+              <div className="mt-3 hidden md:flex" >
+                <button onClick={handleLogout} className="px-2 py-1 bg-white text-black rounded-md ">
+                  Keluar
+                </button>
               </div>
+
             </div>
+
             <div className="p-2 flex flex-col gap-2">
               <div className="flex gap-2">
                 <div className="text-left sm:text-left">

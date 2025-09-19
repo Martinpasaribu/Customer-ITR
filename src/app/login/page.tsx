@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // pages/login.tsx
 "use client";
 
@@ -5,6 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import { Eye, EyeOff, LogIn } from "lucide-react"; // untuk ikon lucide-react
+import { useToast } from "@/components/ToastContect";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,18 +14,23 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+    const { showToast } = useToast();
+    
   const handleLogin = async () => {
     if (!form.user_id || !form.password) {
-      alert("Email dan password wajib diisi!");
+      showToast("warning",`Email dan password wajib diisi!`);
       return;
     }
 
     try {
       setLoading(true);
-      await api.post("/auth/login-customer", form);
+
+      const res =  await api.post("/auth/login-customer", form);
       router.push("/dashboard");
-    } catch (err) {
-      alert(`Login gagal! Periksa kembali ${err}`);
+
+      showToast("success", `${res.data.message}`);
+    } catch (error: any) {
+      showToast("error",`${error.response?.data.message}`);
     } finally {
       setLoading(false);
     }
