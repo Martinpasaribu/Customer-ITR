@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { User, Plus } from "lucide-react";
+import { User, Plus, Settings } from "lucide-react";
 import AddReportModal from "./components/AddReportModal";
 import { authService } from "@/lib/auth";
 import { useRouter } from "next/navigation";
@@ -15,6 +15,7 @@ import ReportList from "./components/ReportList";
 import FacilityList from "./components/FacilityList";
 import { useToast } from "@/components/ToastContect";
 import Header from "@/components/Header";
+import Link from "next/link";
 // 🔹 Impor Header jika Anda tetap ingin menggunakannya di sini,
 //    tetapi ini tidak sesuai dengan praktik terbaik yang kita diskusikan sebelumnya
 // import Header from "@/components/Header";
@@ -88,7 +89,7 @@ export default function CustomerPage() {
       <Header />
       {/* Greeting Card */}
       {loading ? <GreetingSkeleton /> : (
-        <section className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-xl shadow p-5 sm:p-6 mb-6 sm:mb-8">
+        <section className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-xl shadow p-5 sm:p-6 mt-10 md:mt-0 mb-6 sm:mb-8 ">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             
             {/* Left - User Info */}
@@ -108,10 +109,17 @@ export default function CustomerPage() {
                 </div>
               </div>
 
-              <div className="mt-3 hidden md:flex" >
+              <div className="mt-3 hidden md:flex gap-2" >
                 <button onClick={handleLogout} className="px-2 py-1 bg-white text-black rounded-md ">
                   Keluar
                 </button>
+
+                {/* <Link href="/settings">
+                  <button className="p-2 hidden md:block hover:bg-gray-100 hover:text-gray-700 rounded-full transition">
+                    <Settings size={20} className=" " />
+                  </button>
+                </Link> */}
+
               </div>
 
             </div>

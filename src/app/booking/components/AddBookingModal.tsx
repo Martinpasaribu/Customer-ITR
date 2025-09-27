@@ -45,6 +45,8 @@ export default function BookingModal({ show, onClose, room }: BookingModalProps)
     } catch (err : any) {
       console.error("Gagal kirim booking", err);
       showToast("error", err.response?.data?.message || err.message);
+    } finally {
+      onClose();
     }
 
     setLoading(false);

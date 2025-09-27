@@ -90,6 +90,9 @@ export default function GuestPage() {
                 {/* Konten utama */}
                 <div className="flex-1">
                 <div className="flex justify-between items-center mb-2">
+                  <h2 className="text-gray-500 font-bold">
+                    {room.code}
+                  </h2>
                     <h2 className="text-lg font-semibold text-gray-800">{room.name}</h2>
                     {room.status === true ? (
                     <span className="px-2 py-1 text-xs bg-green-100 text-green-700 rounded-full">
